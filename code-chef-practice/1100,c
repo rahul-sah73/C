@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        int n;
+        scanf("%d", &n);
+        int *arr = (int *)malloc(n * sizeof(int)); // Dynamically allocate memory for the array
+        int frequency[100001] = {0}; // Assuming A[i] <= 100000, initialize all frequencies to 0
+        
+        // Read the array elements and update frequencies
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &arr[i]);
+            frequency[arr[i]]++;
+        }
+        
+        // Find the maximum frequency
+        int maxFrequency = 0;
+        for (int i = 0; i <= 100000; i++) {
+            if (frequency[i] > maxFrequency) {
+                maxFrequency = frequency[i];
+            }
+        }
+        
+        // The answer is n - maxFrequency
+        printf("%d\n", n - maxFrequency);
+
+        free(arr); // Free the dynamically allocated memory
+    }
+    return 0;
+}
